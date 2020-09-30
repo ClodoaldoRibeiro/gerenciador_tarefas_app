@@ -6,7 +6,7 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre o projeto
 
-Porjeto criado com o propósito de adquirir conhecimento em Dart.
+Porjeto criado com o propósito de aprimorar conhecimento em Dart.
 
 ## Tecnologias
 As tecnologias usadas até o momento são:
