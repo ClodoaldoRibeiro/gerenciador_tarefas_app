@@ -22,6 +22,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List _toDOList = [];
+  Map<String, dynamic> _lastRemove = Map();
+  int _lastRemovePos;
 
   final TextEditingController _novoTarefaontroller = TextEditingController();
 
@@ -45,6 +47,25 @@ class _HomeState extends State<Home> {
       _toDOList.add(newToDO);
       _salveData();
     });
+  }
+
+  Future<Null> _refresh() async {
+    await Future.delayed(Duration(seconds: 1));
+
+    setState(() {
+      _toDOList.sort((a, b) {
+        if (a["ok"] && !b["ok"])
+          return 1;
+        else if (!a["ok"] && b["ok"])
+          return -1;
+        else
+          return 0;
+      });
+
+      _salveData();
+    });
+
+    return null;
   }
 
   @override
@@ -81,28 +102,71 @@ class _HomeState extends State<Home> {
             ),
           ),
           Expanded(
-            child: ListView.builder(
-                padding: EdgeInsets.only(top: 10.0),
-                itemCount: _toDOList.length,
-                // ignore: missing_return
-                itemBuilder: (context, index) {
-                  return CheckboxListTile(
-                    title: Text(_toDOList[index]["titulo"]),
-                    value: _toDOList[index]["ok"],
-                    secondary: CircleAvatar(
-                      child: Icon(
-                          _toDOList[index]["ok"] ? Icons.check : Icons.error),
-                    ),
-                    onChanged: (c) {
-                      setState(() {
-                        _toDOList[index]["ok"] = c;
-                        _salveData();
-                      });
-                    },
-                  );
-                }),
-          )
+              child: RefreshIndicator(
+                  onRefresh: _refresh,
+                  child: ListView.builder(
+                      padding: EdgeInsets.only(top: 10.0),
+                      itemCount: _toDOList.length,
+                      // ignore: missing_return
+                      itemBuilder: buildItem),
+              ))
         ],
+      ),
+    );
+  }
+
+  Widget buildItem(BuildContext context, int index) {
+    return Dismissible(
+      key: Key(DateTime
+          .now()
+          .millisecondsSinceEpoch
+          .toString()),
+      background: Container(
+        color: Colors.red,
+        child: Align(
+          alignment: Alignment(-0.9, 0),
+          child: Icon(
+            Icons.delete,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      onDismissed: (direcao) {
+        setState(() {
+          _lastRemove = Map.from(_toDOList[index]);
+          _lastRemovePos = index;
+          _toDOList.removeAt(index);
+          _salveData();
+
+          final snack = SnackBar(
+            content: Text("Tarefa \"${_lastRemove["titulo"]} \" removida "),
+            action: SnackBarAction(
+              label: "Desfazer",
+              onPressed: () {
+                setState(() {
+                  _toDOList.insert(_lastRemovePos, _lastRemove);
+                  _salveData();
+                });
+              },
+            ),
+            duration: Duration(seconds: 2),
+          );
+          Scaffold.of(context).showSnackBar(snack);
+        });
+      },
+      direction: DismissDirection.startToEnd,
+      child: CheckboxListTile(
+        title: Text(_toDOList[index]["titulo"]),
+        value: _toDOList[index]["ok"],
+        secondary: CircleAvatar(
+          child: Icon(_toDOList[index]["ok"] ? Icons.check : Icons.error),
+        ),
+        onChanged: (c) {
+          setState(() {
+            _toDOList[index]["ok"] = c;
+            _salveData();
+          });
+        },
       ),
     );
   }
