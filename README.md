@@ -35,7 +35,7 @@ Apenas fazer o donwlod do [app-debug.apk](https://github.com/ClodoaldoRibeiro/ge
 <br /> 
 <p align="center">
 <img src="https://github.com/ClodoaldoRibeiro/gerenciador_tarefas_app/blob/master/screenshots/03.jpeg" alt="ClodoaldoRibeiro"/>
-<h5 align="center">Tela2: Excluir </h5>
+<h5 align="center">Tela3: Excluir </h5>
 </p>
 
 
