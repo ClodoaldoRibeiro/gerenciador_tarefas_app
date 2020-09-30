@@ -6,7 +6,7 @@
 <!-- ABOUT THE PROJECT -->
 ## Sobre o projeto
 
-Porjeto criado com o propósito de aprimorar conhecimento em Dart.
+Porjeto criado com o propósito de aprimorar os conhecimento na linguagem Dart/Flutter.
 
 ## Tecnologias
 As tecnologias usadas até o momento são:
