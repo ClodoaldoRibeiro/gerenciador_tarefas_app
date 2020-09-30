@@ -11,8 +11,9 @@ Porjeto criado com o propósito de aprimorar os conhecimento na linguagem Dart/F
 ## Tecnologias
 As tecnologias usadas até o momento são:
 
-* [Flutter SDK ](https://flutter.dev/docs/get-started/install/windows) - SDK Flutter para rodar as aplicações 
-* [Android Studio 4.0](https://developer.android.com/studio) - Ambiente de desenvolvimento
+* [Flutter SDK ](https://flutter.dev/docs/get-started/install/windows) - SDK Flutter para rodar as aplicações.
+* [Android Studio 4.0](https://developer.android.com/studio) - Ambiente de desenvolvimento.
+* JSON - Manipular Json(CRUD).
 
 ## Instruções de uso
 Apenas fazer o donwlod do [app-debug.apk](https://github.com/ClodoaldoRibeiro/gerenciador_tarefas_app/blob/master/screenshots/app-debug.apk) e executar no android.
