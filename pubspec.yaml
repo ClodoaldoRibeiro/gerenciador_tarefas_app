@@ -1,4 +1,4 @@
-name: gerenciador_tarefas
+name: gerenciador_tarefas_app
 description: Um simples gerenciador de tarefas
 
 # The following line prevents the package from being accidentally published to
